@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML / ERB to Slim Converter | GIZ Tools</title>
+    <meta name="description" content="Convert HTML / ERB to Slim template online tools">
+    <style media="screen">
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+        letter-spacing: 2px;
+        margin: 20px;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      h1 a, h1 a:visited {
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      small {
+        font-size: 0.8em;
+      }
+
+      .box-container {
+        display: inline-block;
+        width: 49%;
+      }
+
+      @media screen and (max-width: 798px) {
+        .box-container {
+          width: 100%;
+        }
+      }
+
+      textarea {
+        width: 100%;
+        height: 60vh;
+        font-size: 1.1em;
+        border-style: solid;
+        border-width: 1px;
+        margin: 8px auto;
+      }
+
+      button {
+        background-color: black;
+        color: white;
+        border: 3px solid black;
+        float: right;
+        letter-spacing: 2px;
+        font-size: 1em;
+        text-transform: uppercase;
+      }
+
+      header {
+        margin-bottom: 20px;
+      }
+
+      footer {
+        margin-top: 20px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1><a href="/html-erb-to-slim.html">HTML / ERB to Slim Converter</a></h1>
+      <small>Online tool to convert HTML / ERB to Slim template - <a href="/">GIZ Tools</a></small>
+    </header>
+
+    <section>
+      <div class="box-container">
+        <!-- first textarea -->
+        <label for="raw_text">HTML / ERB</label>
+        <textarea id="raw_text" name="raw_text">
+<html>
+  <head>
+    <title>Enter Your Code Here</title>
+  <%= foo = [1,2,3] %>
+  <body>
+    <%= foo.each do |bar| %>
+    <p>Or click Convert to test it out!</p>
+  </body>
+  </head>
+</html>
+        </textarea>
+      </div>
+
+      <div class="box-container">
+        <!-- second textarea -->
+        <label for="raw_text">Slim</label>
+        <textarea id="converted_text" name="converted_text"></textarea>
+        <button type="button" name="button" onclick="submit()">Convert</button>
+      </div>
+    </section>
+    <script type="text/javascript">
+      function submit() {
+        var data = new FormData();
+        var raw_text = document.getElementById("raw_text");
+        data.append("raw_text", raw_text.value);
+
+        var url = 'https://slim-converter.herokuapp.com/convert'
+        var xhr = new XMLHttpRequest();
+
+        xhr.addEventListener("readystatechange", function() {
+          if(this.readyState === 4) {
+            document.getElementById("converted_text").value = JSON.parse(this.responseText)["converted_text"];
+          }
+        });
+
+        xhr.open("POST", url, true);
+        xhr.send(data);
+      }
+    </script>
+
+    <footer>
+      <small>
+         HTML / ERB to Slim Converter - <a href="/">GIZ Tools</a> | Made with <span style="color: #e25555;">&hearts;</span> by <a href="https://gizipp.com">GIZIPP</a>
+      </small>
+    </footer>
+  </body>
+</html>
