@@ -102,22 +102,34 @@
       </div>
     </section>
     <script type="text/javascript">
+      var request = new XMLHttpRequest();
+      var url = 'https://slim-converter.herokuapp.com'
+
+      window.onload = function(){
+
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+            }
+        };
+
+        request.open('GET', url);
+        request.send();
+      }
+
       function submit() {
-        var data = new FormData();
         var raw_text = document.getElementById("raw_text");
+        var data = new FormData();
+
         data.append("raw_text", raw_text.value);
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("converted_text").value = JSON.parse(this.responseText)["converted_text"];
+            }
+        };
 
-        var url = 'https://slim-converter.herokuapp.com/convert'
-        var xhr = new XMLHttpRequest();
-
-        xhr.addEventListener("readystatechange", function() {
-          if(this.readyState === 4) {
-            document.getElementById("converted_text").value = JSON.parse(this.responseText)["converted_text"];
-          }
-        });
-
-        xhr.open("POST", url, true);
-        xhr.send(data);
+        request.open("POST", url + '/convert', true);
+        request.send(data);
       }
     </script>
 
