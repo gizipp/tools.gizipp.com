@@ -14,16 +14,25 @@
         font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
         letter-spacing: 2px;
         margin: 20px;
+        max-width: 560px;
       }
 
-      h1 {
+      h1, h2 {
         margin: 0;
       }
 
-      h1 a, h1 a:visited {
-        color: black;
+      h2 {
+        font-size: 1.2em;
+      }
+
+      h1 a, h1 a:visited, h2 a, h2 a:visited  {
+        color: royalblue;
         text-decoration: none;
         font-weight: bold;
+      }
+
+      li {
+        padding-bottom: 16px;
       }
 
       small {
@@ -49,8 +58,16 @@
     </header>
     <ul>
       <li>
-        <a href="/html-erb-to-slim.html">HTML / ERB to Slim Converter</a>
-        <small>Convert HTML / ERB to Slim template online tools</small>
+        <h2><a href="/html-erb-to-slim">HTML / ERB to Slim Converter</a></h2>
+        <small>Online tools to help you convert HTML / ERB into Slim template.</small>
+      </li>
+      <li>
+        <h2><a href="/domain-availability">Domain Avaibility</a></h2>
+        <small>Tools to check domain availability, is it registered? Show me (1) the contact or (2) any domain alternative if so.</small>
+      </li>
+      <li>
+        <h2><a href="/domain-price-comparison">Domain Price Comparation</a></h2>
+        <small>Compare domain price from various registrar e.g Godaddy, Domainesia, NameCheap, and many more.</small>
       </li>
     </ul>
   </body>
