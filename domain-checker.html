@@ -7,4 +7,48 @@ layout: tools
   <small>Simple tool to check domain availability. - <a href="/">GIZ Tools</a></small>
 </header>
 
-<p>Coming soon.</p>
+<form class="" action="index.html" method="post">
+  <input type="text" name="domain" value="gizipp.com">
+  <button type="button" name="button">Check</button>
+</form>
+
+<div class="box-container">
+<ul>
+  <li>gizipp.net</li>
+  <li>gizipp.org</li>
+  <li>gizipp.io</li>
+  <li>gizipp.info</li>
+  <li>gizipp.co.id</li>
+  <li><span class="available">gizipp.co</span> <small>- compare price</small> </li>
+  <li><span class="unavailable">gizipp.my.id</span><small>- check whois</small> </li>
+</ul>
+</div>
+
+<footer>
+  <small>
+     Domain Checker - <a href="/">GIZ Tools</a> | Made with <span style="color: #e25555;">&hearts;</span> by <a href="https://gizipp.com">GIZIPP</a>
+  </small>
+</footer>
+
+<style media="screen">
+  form {
+    display: flex;
+  }
+
+  input {
+    flex: 1;
+  }
+
+  .box-container {
+    padding-top: 10px;
+  }
+
+  .unavailable {
+    text-decoration: line-through;
+    color: tomato;
+  }
+
+  .available {
+    color: royalblue;
+  }
+</style>
