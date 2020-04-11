@@ -10,7 +10,8 @@ layout: tools
 <section>
   <div class="box-container">
     <label for="raw_text">HTML / ERB</label>
-    <textarea id="raw_text" name="raw_text">{% include raw_text.html %}</textarea>
+    <textarea id="raw_text" name="raw_text"></textarea>
+    <button type="button" name="button" onclick="empty()" title="Empty">Clear</button>
   </div>
   <div class="box-container">
     <label for="raw_text">Slim</label>
@@ -21,29 +22,62 @@ layout: tools
 
 <script type="text/javascript">
   var request = new XMLHttpRequest();
-  var url = 'https://slim-converter-api.herokuapp.com'
+  var url = 'https://slim-converter-api.herokuapp.com';
+  var raw_text_area = document.getElementById("raw_text");
+  var converted_text_area = document.getElementById("converted_text");  
+  var saved_raw_text = localStorage.raw_text;
+  var saved_converted_text = localStorage.converted_text;
 
   window.onload = function(){
+    if (saved_raw_text){
+      raw_text_area.value = saved_raw_text;
+    } else {
+      raw_text_area.value = `<html>
+  <head>
+    <title>Enter Your HTML / ERB Code Here</title>
+  </head>
+  <body>
+    <% foo = [1,2,3] %>
+    <%- foo.each do |bar| %>
+      <p>Or click Convert to test it out! (<%= bar %>)</p>
+    <% end %>
+  </body>
+</html>`;
+    }
+
+    if (saved_converted_text) {
+      converted_text_area.value = saved_converted_text;
+    }
 
     request.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-        }
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      }
     };
 
     request.open('GET', url);
     request.send();
   }
 
-  function submit() {
-    var raw_text = document.getElementById("raw_text");
-    var data = new FormData();
 
-    data.append("raw_text", raw_text.value);
+  window.onunload = function(){
+    localStorage.raw_text = raw_text_area.value;
+    localStorage.converted_text = converted_text_area.value;
+  }
+
+  function empty() {
+    raw_text_area.value = '';
+    converted_text_area.value = '';
+  }
+
+  function submit() {
+    var data = new FormData();
+    data.append("raw_text", raw_text_area.value);
+
     request.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("converted_text").value = JSON.parse(this.responseText)["converted_text"];
-        }
+      if (this.readyState == 4 && this.status == 200) {
+        converted_text_area.value = JSON.parse(this.responseText)["converted_text"];
+      }
     };
 
     request.open("POST", url + '/convert', true);
