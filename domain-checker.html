@@ -12,16 +12,16 @@ layout: tools
   <button type="button" name="button">Check</button>
 </form>
 
-<div class="box-container">
-<ul>
-  <li>gizipp.net</li>
-  <li>gizipp.org</li>
-  <li>gizipp.io</li>
-  <li>gizipp.info</li>
-  <li>gizipp.co.id</li>
-  <li><span class="available">gizipp.co</span> <small>- compare price</small> </li>
-  <li><span class="unavailable">gizipp.my.id</span><small>- check whois</small> </li>
-</ul>
+<div class="list-container">
+  <ul>
+    <li><a href="/domain-whois?domain=gizipp.net" class="unavailable" title="Unavailable, check whois the owner now!">gizipp.net</a></li>
+    <li><a href="/domain-whois?domain=gizipp.org" class="unavailable" title="Unavailable, check whois the owner now!">gizipp.org</a></li>
+    <li><a href="/domain-whois?domain=gizipp.info" class="unavailable" title="Unavailable, check whois the owner now!">gizipp.info</a></li>
+    <li><a href="/domain-price-comparison?domain=gizipp.io" class="available" title="Available, compare domain price now!">gizipp.io</a></li>
+    <li><a href="/domain-price-comparison?domain=gizipp.co" class="available" title="Available, compare domain price now!">gizipp.co</a></li>
+    <li><a href="/domain-whois?domain=gizipp.my.id" class="unavailable" title="Unavailable, check whois the owner now!">gizipp.my.id</a></li>
+    <li><a href="/domain-price-comparison?domain=gizipp.co.id" class="available" title="Available, compare domain price now!">gizipp.co.id</a></li>
+  </ul>
 </div>
 
 <footer>
@@ -37,18 +37,32 @@ layout: tools
 
   input {
     flex: 1;
+    font-size: 1.2em;
+    text-transform: lowercase;
   }
 
-  .box-container {
+  .list-container {
     padding-top: 10px;
   }
 
   .unavailable {
     text-decoration: line-through;
-    color: tomato;
+    color: red;
   }
 
   .available {
-    color: royalblue;
+    color: blue;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-flow: column;
+  }
+
+  li {
+    padding: 2px;
+    font-size: 1.1em;
   }
 </style>
