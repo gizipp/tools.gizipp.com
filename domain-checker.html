@@ -8,20 +8,12 @@ layout: tools
 </header>
 
 <form class="" action="index.html" method="post">
-  <input type="text" name="domain" value="gizipp.com">
-  <button type="button" name="button">Check</button>
+  <input id="domain" type="text" name="domain"value="gizipp.com">
+  <button type="button" name="button" onclick="check()">Check</button>
 </form>
 
 <div class="list-container">
-  <ul>
-    <li><a href="/domain-whois?domain=gizipp.net" class="unavailable" title="Unavailable, check whois the owner now!">gizipp.net</a></li>
-    <li><a href="/domain-whois?domain=gizipp.org" class="unavailable" title="Unavailable, check whois the owner now!">gizipp.org</a></li>
-    <li><a href="/domain-whois?domain=gizipp.info" class="unavailable" title="Unavailable, check whois the owner now!">gizipp.info</a></li>
-    <li><a href="/domain-price-comparison?domain=gizipp.io" class="available" title="Available, compare domain price now!">gizipp.io</a></li>
-    <li><a href="/domain-price-comparison?domain=gizipp.co" class="available" title="Available, compare domain price now!">gizipp.co</a></li>
-    <li><a href="/domain-whois?domain=gizipp.my.id" class="unavailable" title="Unavailable, check whois the owner now!">gizipp.my.id</a></li>
-    <li><a href="/domain-price-comparison?domain=gizipp.co.id" class="available" title="Available, compare domain price now!">gizipp.co.id</a></li>
-  </ul>
+  <ul id="domain-lists"></ul>
 </div>
 
 <footer>
@@ -66,3 +58,43 @@ layout: tools
     font-size: 1.1em;
   }
 </style>
+
+<script type="text/javascript">
+  var url = 'https://domain-checker-api.herokuapp.com';
+  var request = new XMLHttpRequest();
+
+  window.onload = function(){
+
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      }
+    };
+
+    request.open('GET', url);
+    request.send();
+  }
+
+  function check() {
+    var data = new FormData();
+    data.append("domain", document.getElementById("domain").value);
+
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var domains = JSON.parse(this.responseText);
+        document.getElementById("domain-lists").innerHTML = '';
+
+        Object.keys(domains).forEach(function (domain) {
+          if (domains[domain]){
+            document.getElementById("domain-lists").innerHTML += `<li><a href="/domain-price-comparison?domain=${domain}" class="available" title="Available, compare domain price now!">${domain}</a></li>`;
+          } else {
+            document.getElementById("domain-lists").innerHTML += `<li><a href="/domain-whois?domain=${domain}" class="unavailable" title="Unavailable, check whois the owner now!">${domain}</a></li>`;
+          }
+        });
+      }
+    };
+
+    request.open("POST", url + '/check', true);
+    request.send(data);
+  }
+</script>
