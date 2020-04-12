@@ -1,0 +1,112 @@
+---
+layout: tools
+---
+
+<header>
+  <h1><a href="#">WHOIS Domain Tools</a></h1>
+  <small>Lookup and check WHOIS records from any certain domain. - <a href="/">GIZ Tools</a></small>
+</header>
+
+<form class="" action="index.html" method="post">
+  <input id="domain" type="text" name="domain"value="gizipp.com">
+  <button type="button" name="button" onclick="check()">Check</button>
+</form>
+
+<div class="list-container">
+  <p id="whois" style="white-space: pre-line"></p>
+</div>
+
+<footer>
+  <small>
+     WHOIS Domain Tools - <a href="/">GIZ Tools</a> | Made with <span style="color: #e25555;">&hearts;</span> by <a href="https://gizipp.com">GIZIPP</a>
+  </small>
+</footer>
+
+<style media="screen">
+  form {
+    display: flex;
+  }
+
+  input {
+    flex: 1;
+    font-size: 1.2em;
+    text-transform: lowercase;
+  }
+
+  .list-container {
+    padding-top: 10px;
+  }
+
+  .unavailable {
+    text-decoration: line-through;
+    color: red;
+  }
+
+  .available {
+    color: blue;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-flow: column;
+  }
+
+  li {
+    padding: 2px;
+    font-size: 1.1em;
+  }
+</style>
+
+<script type="text/javascript">
+  var url = 'https://whois-domain-api.herokuapp.com';
+  var request = new XMLHttpRequest();
+
+  window.onload = function(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const domain = urlParams.get('domain')
+    const has_domain = urlParams.has('domain')
+
+    if (has_domain) {
+      var data = new FormData();
+      data.append("domain", domain);
+
+      request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var domains = JSON.parse(this.responseText);
+          document.getElementById("whois").innerHTML = domains['data'];
+        }
+      };
+
+      request.open("POST", url + '/check', true);
+      request.send(data);
+    } else {
+      request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+        }
+      };
+
+      request.open('GET', url);
+      request.send();
+    }
+  }
+
+  function check() {
+    var data = new FormData();
+    data.append("domain", document.getElementById("domain").value);
+
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var domains = JSON.parse(this.responseText);
+        document.getElementById("whois").innerHTML = domains['data'];
+      }
+    };
+
+    request.open("POST", url + '/check', true);
+    request.send(data);
+  }
+</script>
