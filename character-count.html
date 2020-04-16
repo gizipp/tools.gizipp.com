@@ -1,0 +1,30 @@
+---
+layout: tools
+title: Character Counter
+description: Simple tools that calculates the number of characters.
+---
+
+<section>
+  <label for="text">Write anything...</label>
+  <textarea id="text" name="text" onkeyup="calculate()">Stockholm syndrome is a condition in which hostages develop a psychological alliance with their captors during captivity.</textarea>
+  <button type="button" name="button" onclick="empty()" title="Empty">Clear</button>
+  <p>Char counts: <span id="count"></span></p>
+</section>
+
+<script type="text/javascript">
+  var textarea = document.getElementById("text");
+  var count = document.getElementById("count");
+
+  window.onload = function(){
+    count.innerHTML = textarea.value.length;
+  }
+
+  function calculate(){
+    count.innerHTML = textarea.value.length;
+  }
+
+  function empty(){
+    textarea.value = '';
+    count.innerHTML = 0;
+  }
+</script>
