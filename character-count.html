@@ -6,7 +6,7 @@ description: Simple tools that calculates the number of characters.
 
 <section>
   <label for="text">Write anything...</label>
-  <textarea id="text" name="text" onkeyup="calculate()" onpaste="calculate()">Stockholm syndrome is a condition in which hostages develop a psychological alliance with their captors during captivity.</textarea>
+  <textarea id="text" name="text" onkeyup="calculate()" onpaste="calculate()" onfocus="calculate()" onblur="calculate()">Stockholm syndrome is a condition in which hostages develop a psychological alliance with their captors during captivity.</textarea>
   <button type="button" name="button" onclick="empty()" title="Empty">Clear</button>
   <p>Char counts: <span id="count"></span></p>
 </section>
