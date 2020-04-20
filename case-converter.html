@@ -1,0 +1,63 @@
+---
+layout: tools
+title: Case Converter
+description: Convert any text to uppercase, lowercase, parameterize, etc.
+---
+
+<section>
+  <label for="text">Your text</label>
+  <textarea id="text" name="text">Stockholm syndrome is a condition in which hostages develop a psychological alliance with their captors during captivity.</textarea>
+  <div class="buttons">
+    <button type="button" name="button" onclick="uppercase()" title="Convert to uppercase">Uppercase</button>
+    <button type="button" name="button" onclick="lowercase()" title="Convert to lowercase">Lowercase</button>
+    <button type="button" name="button" onclick="parameterize()" title="Convert to parameterize">Parameterize</button>
+    <button type="button" name="button" onclick="unparameterize()" title="Convert from parameterize">Unparameterize</button>
+    <button type="button" name="button" onclick="titlecase()" title="Convert to parameterize">Titlecase</button>
+  </div>
+</section>
+
+<script type="text/javascript">
+  var textarea = document.getElementById("text");
+  var text = textarea.value;
+
+  function uppercase(){
+    textarea.value = textarea.value.toUpperCase();
+  }
+
+  function lowercase(){
+    textarea.value = textarea.value.toLowerCase();
+  }
+
+  function parameterize(){
+    // credit: https://www.w3resource.com/javascript-exercises/javascript-string-exercise-7.php
+    textarea.value = textarea.value.trim().toLowerCase().replace(/[^a-zA-Z0-9 -]/, "").replace(/\s/g, "-");
+  }
+
+  function unparameterize(){
+    textarea.value = textarea.value.trim().replace(/-/g," ");
+  }
+
+  function titlecase(){
+    //credit: https://www.tutorialspoint.com/how-to-title-case-a-sentence-in-javascript
+    var words = textarea.value.trim().toLowerCase().split(" ");
+    for(var i = 0; i< words.length; i++){
+      console.log(words);
+        if (i != 0 && ["a","an","the","and","but","or","in","in","with"].includes(words[i])) {
+           continue; // do not upcase first word and stop word
+         }
+        words[i] = words[i][0].toUpperCase() + words[i].slice(1);
+      }
+    textarea.value = words.join(" ");
+  }
+</script>
+
+<style media="screen">
+  .buttons {
+    padding-bottom: 30px;
+    display: block;
+  }
+
+  button {
+    margin-bottom: 10px;
+  }
+</style>
