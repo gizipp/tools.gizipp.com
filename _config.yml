@@ -2,8 +2,12 @@ title: GIZ Tools
 email: gizipp.gizipp+tools@gmail.com
 description: >-
   Various collection tools for human, web developer or programing. HTML / ERB to Slim Converter
-
 url: 'https://tools.gizipp.com'
 permalink: '/:title'
 plugins:
   - jekyll-sitemap
+  - jekyll-minifier
+
+jekyll-minifier:
+  uglifier_args:
+    harmony: true
