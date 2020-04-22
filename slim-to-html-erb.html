@@ -4,4 +4,80 @@ title: Slim to HTML / ERB Converter
 description: Online tool to help you convert Slim template into HTML / ERB.
 ---
 
-Sorry, this tool is unavailable.
+<section>
+  <aside>
+    <label for="raw_slim">Slim</label>
+    <textarea id="raw_slim" name="raw_slim"></textarea>
+    <button type="button" name="button" onclick="submit()">Convert</button>
+    <button type="button" name="button" onclick="empty()" title="Empty">Clear</button>
+  </aside>
+  <aside>
+    <label for="converted_slim">HTML / ERB </label>
+    <textarea id="converted_slim" name="converted_slim"></textarea>
+  </aside>
+</section>
+
+<script type="text/javascript">
+  var request = new XMLHttpRequest();
+  var url = 'https://slim-to-html-erb-api.herokuapp.com';
+  var raw_slim_area = document.getElementById("raw_slim");
+  var converted_slim_area = document.getElementById("converted_slim");
+  var saved_raw_slim = localStorage.raw_slim;
+  var saved_converted_slim = localStorage.converted_slim;
+
+  window.onload = function(){
+    if (saved_raw_slim){
+      raw_slim_area.value = saved_raw_slim;
+    } else {
+      raw_slim_area.value = `html
+  head
+    title
+      | Enter Your HTML / ERB Code Here
+  body
+    - foo = [1,2,3]
+    - foo.each do |bar|
+      p
+        | Or click Convert to test it out! (
+        = bar
+        | )`;
+    }
+
+    if (saved_converted_slim) {
+      converted_slim_area.value = saved_converted_slim;
+    }
+
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      }
+    };
+
+    request.open('GET', url);
+    request.send();
+  }
+
+
+  window.onunload = function(){
+    localStorage.raw_slim = raw_slim_area.value;
+    localStorage.converted_slim = converted_slim_area.value;
+  }
+
+  function empty() {
+    raw_slim_area.value = '';
+    converted_slim_area.value = '';
+  }
+
+  function submit() {
+    var data = new FormData();
+    data.append("raw_slim", raw_slim_area.value);
+
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        converted_slim_area.value = JSON.parse(this.responseText)["converted_slim"];
+      }
+    };
+
+    request.open("POST", url + '/convert', true);
+    request.send(data);
+  }
+</script>
