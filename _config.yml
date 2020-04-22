@@ -3,7 +3,15 @@ email: gizipp.gizipp+tools@gmail.com
 description: >-
   Various collection tools for human, web developer or programing. HTML / ERB to Slim Converter
 url: 'https://tools.gizipp.com'
-permalink: '/:title'
+
+collections:
+  tools:
+    output: true
+    permalink: '/:title'
+    order:
+      - html-erb-to-slim.html
+      - slim-to-html-erb.html
+
 plugins:
   - jekyll-sitemap
   - jekyll-minifier

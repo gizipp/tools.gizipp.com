@@ -10,41 +10,12 @@ description: Various collection of useful web developer / programing tools! HTML
   </h1>
   <small>Various collection human tools</small>
 </header>
+
 <ul>
-  <li>
-    <h2><a href="/html-erb-to-slim">HTML / ERB to Slim Converter</a></h2>
-    <small>Online tool to help you convert HTML / ERB into Slim template.</small>
-  </li>
-  <li>
-    <h2><a href="/slim-to-html-erb">Slim to HTML / ERB Converter</a></h2>
-    <small>Online tool to help you convert Slim template into HTML / ERB.</small>
-  </li>
-  <li>
-    <h2><a href="/domain-checker">Domain Checker</a></h2>
-    <small>Simple tool to check domain availability, is it registered?</small>
-  </li>
-  <li>
-    <h2><a href="/domain-price-comparison">Domain Price Comparation</a></h2>
-    <small>Tool to compare domain price from various registrar.</small>
-  </li>
-  <li>
-    <h2><a href="/latitude-longitude-finder">Latitude and Longitude Finder</a></h2>
-    <small>Tool to find latitude longitude coordinates from certain place.</small>
-  </li>
-  <li>
-    <h2><a href="/whois-domain-tools">WHOIS Domain Tools</a></h2>
-    <small>Lookup and check WHOIS records from any certain domain.</small>
-  </li>
-  <li>
-    <h2><a href="/ns-lookup">NS Lookup</a></h2>
-    <small>Lookup NS records from any certain domain.</small>
-  </li>
-  <li>
-    <h2><a href="/character-count">Character Count</a></h2>
-    <small>Simple tools that calculates the number of characters.</small>
-  </li>
-  <li>
-    <h2><a href="/case-converter">Case Converter</a></h2>
-    <small>Convert any text to uppercase, lowercase, parameterize, etc.</small>
-  </li>
+  {%- for tool in site.tools -%}
+    <li>
+      <h2><a href="{{ tool.url }}">{{ tool.title }}</a></h2>
+      <small>{{ tool.description }}</small>
+    </li>
+  {%- endfor -%}
 </ul>
