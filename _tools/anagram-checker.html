@@ -1,0 +1,71 @@
+---
+layout: tools
+title: Anagram Checker
+description: Checks two words, are they anagrams to each other?
+last_modified_at: 2021-08-08
+---
+
+<form>
+  <input id="stringA" type="text" name="string-a" value="rail safety">
+  <span><===></span>
+  <input id="stringB" type="text" name="string-b" value="fairy tales">
+  <button type="button" name="button" onclick="check()">Check</button>
+</form>
+
+<div>
+  <p id="result">RAIL SAFETY and FAIRY TALES are anagrams!</p>
+</div>
+
+<style media="screen">
+  form {
+    display: flex;
+  }
+
+  form > span {
+    padding: 0 10px;
+  }
+
+  input {
+    flex: 1 1 0;
+    width: 0;
+    justify-content: space-between;
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
+
+<script type="text/javascript">
+  var stringA = document.getElementById("stringA");
+  var stringB = document.getElementById("stringB");
+  var result  = document.getElementById("result");
+
+  function check() {
+    text = `${stringA.value.toUpperCase()} and ${stringB.value.toUpperCase()}`;
+    if (anagrams(stringA.value, stringB.value)) {
+      result.innerHTML = `${text} are anagrams!`
+    } else {
+      result.innerHTML = `${text} are <span style='color: red;'>NOT</span> anagrams!`
+    }
+  }
+
+  function anagrams(stringA, stringB) {
+       stringA = stringA.replace(/[^\w]/g, '').toLowerCase()
+       stringB = stringB.replace(/[^\w]/g, '').toLowerCase()
+
+       if (stringA.length !== stringB.length) {
+           return false
+       }
+
+       let arrB = stringB.split("")
+
+       for (let char of stringA ){
+           if (!arrB.includes(char)) {
+               return false
+               break;
+           } else {
+               arrB.splice(arrB.indexOf(char), 1)
+           }
+       }
+       return true
+   }
+</script>
