@@ -1,0 +1,73 @@
+---
+layout: tools
+title: Broken Link Checker
+description: Simple tool to check dead / broken links.
+last_modified_at: 2021-10-23
+---
+
+<form class="" action="index.html" method="post">
+  <input id="url" type="text" name="url" value="gizipp.com">
+  <button type="button" name="button" onclick="check()">Check</button>
+</form>
+
+<div class="list-container">
+  <ul id="url-lists"></ul>
+</div>
+
+<style media="screen">
+  form {
+    display: flex;
+  }
+
+  input {
+    flex: 1;
+    font-size: 1.2em;
+    text-transform: lowercase;
+  }
+
+  .list-container {
+    padding-top: 10px;
+  }
+
+  .unavailable {
+    text-decoration: line-through;
+    color: red;
+  }
+
+  .available {
+    color: blue;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-flow: column;
+  }
+
+  li {
+    padding: 2px;
+    font-size: 1.1em;
+  }
+</style>
+
+<script type="text/javascript">
+  var url = 'https://broken-link-checker-api.herokuapp.com';
+  var request = new XMLHttpRequest();
+
+  window.onload = function(){
+
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      }
+    };
+
+    request.open('GET', url);
+    request.send();
+  }
+
+  function check() {
+    console.log('sdsds');
+  }
+</script>
