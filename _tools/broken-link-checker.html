@@ -6,7 +6,7 @@ last_modified_at: 2021-10-23
 ---
 
 <form class="" action="index.html" method="post">
-  <input id="url" type="text" name="url" value="gizipp.com">
+  <input id="url" type="text" name="url" value="https://blog.gizipp.com">
   <button type="button" name="button" onclick="check()">Check</button>
 </form>
 
@@ -36,6 +36,10 @@ last_modified_at: 2021-10-23
 
   .available {
     color: blue;
+  }
+
+  .okay {
+    color: green;
   }
 
   ul {
@@ -75,13 +79,18 @@ last_modified_at: 2021-10-23
       if (this.readyState == 4 && this.status == 200) {
         var links = JSON.parse(this.responseText);
         document.getElementById("link-lists").innerHTML = '';
-
-        Object.keys(links).forEach(function (link) {
-          if (links[link]){
-            document.getElementById("link-lists").innerHTML += `<li>${link}</li>`;
-          } else {
-            document.getElementById("link-lists").innerHTML += `<li>${link}</li>`;
-          }
+        links.links.forEach(link => {
+            console.log(link.url);
+            console.log(link.anchor);
+            console.log(link.status);
+            var to = `<a href="${link.url}">${link.anchor}</a>`;
+            if (link.status > 400) {
+              document.getElementById("link-lists").innerHTML += `<li class="unavailable"><span>${link.status}</span> - ${to}</li>`;
+            } else if (link.status > 300) {
+              document.getElementById("link-lists").innerHTML += `<li class="okay"><span>${link.status}</span> - ${to}</li>`;
+            } else {
+              document.getElementById("link-lists").innerHTML += `<li><span class="available">${link.status}</span> - ${to}</li>`;
+            }
         });
       }
     };
