@@ -11,7 +11,7 @@ last_modified_at: 2021-10-23
 </form>
 
 <div class="list-container">
-  <ul id="url-lists"></ul>
+  <ul id="link-lists"></ul>
 </div>
 
 <style media="screen">
@@ -68,6 +68,25 @@ last_modified_at: 2021-10-23
   }
 
   function check() {
-    console.log('sdsds');
+    var data = new FormData();
+    data.append("url", document.getElementById("url").value);
+
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var links = JSON.parse(this.responseText);
+        document.getElementById("link-lists").innerHTML = '';
+
+        Object.keys(links).forEach(function (link) {
+          if (links[link]){
+            document.getElementById("link-lists").innerHTML += `<li>${link}</li>`;
+          } else {
+            document.getElementById("link-lists").innerHTML += `<li>${link}</li>`;
+          }
+        });
+      }
+    };
+
+    request.open("POST", url + '/check', true);
+    request.send(data);
   }
 </script>
