@@ -1,7 +1,7 @@
 ---
 layout: tools
-title: Slim to HTML ERB Converter
-description: Free online tool to help you convert Slim template into HTML ERB.
+title: Slim to HTML Converter
+description: Free online tool to help you convert Slim template into HTML.
 last_modified_at: 2020-04-22
 ---
 
@@ -13,7 +13,7 @@ last_modified_at: 2020-04-22
     <button type="button" name="button" onclick="empty()" title="Empty">Clear</button>
   </aside>
   <aside>
-    <label for="converted_text">HTML ERB </label>
+    <label for="converted_text">HTML </label>
     <textarea id="converted_text" name="converted_text"></textarea>
   </aside>
 </section>
@@ -78,7 +78,7 @@ last_modified_at: 2020-04-22
       }
     };
 
-    request.open("POST", url + '/convert-to-html-erb', true);
+    request.open("POST", url + '/convert-to-html', true);
     request.send(data);
   }
 </script>
