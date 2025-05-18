@@ -1,13 +1,13 @@
 ---
 layout: tools
-title: HTML / ERB to Slim Converter
-description: Online tool to help you convert HTML / ERB into Slim template.
+title: HTML ERB to Slim Converter
+description: Online tool to help you convert HTML ERB into Slim template.
 last_modified_at: 2020-04-22
 ---
 
 <section>
   <aside>
-    <label for="raw_text">HTML / ERB</label>
+    <label for="raw_text">HTML ERB</label>
     <textarea id="raw_text" name="raw_text"></textarea>
     <button type="button" name="button" onclick="submit()">Convert</button>
     <button type="button" name="button" onclick="empty()" title="Empty">Clear</button>
@@ -32,12 +32,12 @@ last_modified_at: 2020-04-22
     } else {
       raw_text_area.value = `<html>
   <head>
-    <title>Enter Your HTML / ERB Code Here</title>
+    <title>Enter Your HTML ERB Code Here</title>
   </head>
   <body>
     <% foo = [1,2,3] %>
     <%- foo.each do |bar| %>
-      <p>Or click Convert to test it out! (<%= bar %>)</p>
+      <p>Click Convert to test it out!</p>
     <% end %>
   </body>
 </html>`;
