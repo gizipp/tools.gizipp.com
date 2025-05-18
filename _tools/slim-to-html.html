@@ -23,8 +23,8 @@ last_modified_at: 2020-04-22
   var url = 'https://slim-converter-api.gizipp.com';
   var raw_text_area = document.getElementById("raw_text");
   var converted_text_area = document.getElementById("converted_text");
-  var saved_raw_text = localStorage.raw_text;
-  var saved_converted_text = localStorage.converted_text;
+  var saved_raw_text = localStorage.raw_text_to_html;
+  var saved_converted_text = localStorage.converted_text_to_html;
 
   window.onload = function(){
     if (saved_raw_text){
@@ -59,8 +59,8 @@ last_modified_at: 2020-04-22
 
 
   window.onunload = function(){
-    localStorage.raw_text = raw_text_area.value;
-    localStorage.converted_text = converted_text_area.value;
+    localStorage.raw_text_to_html = raw_text_area.value;
+    localStorage.converted_text_to_html = converted_text_area.value;
   }
 
   function empty() {
