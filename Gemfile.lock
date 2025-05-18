@@ -107,7 +107,7 @@ DEPENDENCIES
   jekyll (~> 4.4.1)
   jekyll-minifier
   jekyll-sitemap
-  rexml (>= 3.2.5)
+  rexml (>= 3.3.2)
 
 RUBY VERSION
    ruby 3.3.4p94

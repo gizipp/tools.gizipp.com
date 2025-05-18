@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '3.3.4'
 
 gem 'jekyll', '~> 4.4.1'
-gem "rexml", ">= 3.2.5"
+gem "rexml", ">= 3.3.2"
 
 group :jekyll_plugins do
   gem 'jekyll-sitemap'
