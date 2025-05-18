@@ -11,7 +11,7 @@ collections:
     order:
       - html-erb-to-slim.html
       - slim-to-html-erb.html
-      - html-erb-to-slim.html
+      - slim-to-html.html
        
 plugins:
   - jekyll-sitemap
