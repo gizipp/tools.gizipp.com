@@ -8,13 +8,19 @@ last_modified_at: 2020-04-22
 <section>
   <aside>
     <label for="raw_text">Slim</label>
-    <textarea id="raw_text" name="raw_text"></textarea>
+    <div class="textarea-container">
+      <textarea id="raw_text" name="raw_text"></textarea>
+      <button class="copy-button" onclick="copyToClipboard('raw_text')">Copy</button>
+    </div>
     <button type="button" name="button" onclick="submit()">Convert</button>
     <button type="button" name="button" onclick="empty()" title="Empty">Clear</button>
   </aside>
   <aside>
     <label for="converted_text">HTML </label>
-    <textarea id="converted_text" name="converted_text"></textarea>
+    <div class="textarea-container">
+      <textarea id="converted_text" name="converted_text"></textarea>
+      <button class="copy-button" onclick="copyToClipboard('converted_text')">Copy</button>
+    </div>
   </aside>
 </section>
 

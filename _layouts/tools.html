@@ -66,6 +66,36 @@
         border-style: solid;
         border-width: 1px;
         margin: 8px auto;
+        position: relative;
+      }
+
+      .textarea-container {
+        position: relative;
+        width: 100%;
+      }
+
+      .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        padding: 4px 8px;
+        font-size: 0.8em;
+        cursor: pointer;
+        z-index: 1;
+        transition: all 0.2s;
+      }
+
+      .copy-button:hover {
+        background-color: #e9ecef;
+      }
+
+      .copy-button.copied {
+        background-color: #28a745;
+        color: white;
+        border-color: #28a745;
       }
 
       button {
@@ -95,5 +125,31 @@
     {% include header.html %}
     {{ content }}
     {% include footer.html %}
+
+    <script>
+    function copyToClipboard(textareaId) {
+      const textarea = document.getElementById(textareaId);
+      const copyButton = textarea.nextElementSibling;
+      
+      // Select the text
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // For mobile devices
+      
+      // Copy the text
+      navigator.clipboard.writeText(textarea.value).then(() => {
+        // Change button text and style
+        copyButton.textContent = 'Copied!';
+        copyButton.classList.add('copied');
+        
+        // Reset button after 2 seconds
+        setTimeout(() => {
+          copyButton.textContent = 'Copy';
+          copyButton.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+    </script>
   </body>
 </html>
