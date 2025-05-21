@@ -10,16 +10,16 @@ last_modified_at: 2020-04-22
     <label for="raw_text">Slim</label>
     <div class="textarea-container">
       <textarea id="raw_text" name="raw_text"></textarea>
-      <button class="copy-button" onclick="copyToClipboard('raw_text')">Copy</button>
+      <button class="copy-button" onclick="copyToClipboard('raw_text')" data-umami-event="Copy Slim Code">Copy</button>
     </div>
-    <button type="button" name="button" onclick="submit()">Convert</button>
-    <button type="button" name="button" onclick="empty()" title="Empty">Clear</button>
+    <button type="button" name="button" onclick="submit()" data-umami-event="Convert to HTML ERB">Convert</button>
+    <button type="button" name="button" onclick="empty()" title="Empty" data-umami-event="Clear All">Clear</button>
   </aside>
   <aside>
     <label for="converted_text">HTML ERB </label>
     <div class="textarea-container">
       <textarea id="converted_text" name="converted_text"></textarea>
-      <button class="copy-button" onclick="copyToClipboard('converted_text')">Copy</button>
+      <button class="copy-button" onclick="copyToClipboard('converted_text')" data-umami-event="Copy HTML ERB Code">Copy</button>
     </div>
   </aside>
 </section>
@@ -49,7 +49,7 @@ last_modified_at: 2020-04-22
       <textarea id="message" name="message" rows="2" placeholder="Tell me about your conversion needs. How many files? Any specific requirements?"></textarea>
     </div>
 
-    <button type="submit" class="submit-btn">Get in Touch</button>
+    <button type="submit" class="submit-btn" data-umami-event="Contact Form Submit">Get in Touch</button>
   </form>
 </div>
 
